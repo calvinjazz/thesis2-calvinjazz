@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-awq9t*)f()36me6unzior#bbbr82hq2v!d(&!sst$gm26iuuz_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['calvinjazz-thesis2.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['thesis2-calvinjazz.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
