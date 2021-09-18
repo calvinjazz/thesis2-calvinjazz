@@ -89,10 +89,6 @@
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
-        {% for message in messages %}
-        <h3>{{message}}</h3>
-        {% endfor %}
-
         <div class="container">
             <div class="row">
               <div class="col-lg-6 d-flex flex-column justify-content-center">
@@ -108,7 +104,6 @@
   
             <div class="col-lg-6">
               <form action="login" method="post" class="php-email-form">
-                {% csrf_token %}
                 <div class="row gy-4">
                 
                   <h3>LOG IN</h3>
