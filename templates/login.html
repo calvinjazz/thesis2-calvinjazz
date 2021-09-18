@@ -142,49 +142,16 @@
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
 
-        <div class="container" data-aos="fade-up">
-  
-          <header class="section-header">
-            <h2>Contact</h2>
-            <p>Contact Us</p>
-          </header>
-  
-          <div class="row gy-4">
-  
-            <div class="col-lg-6">
-  
-              <div class="row gy-4">
-                <div class="col-md-6">
-                  <div class="info-box">
-                    <i class="bi bi-geo-alt"></i>
-                    <h3>Address</h3>
-                    <p>A108 Adam Street,<br>New York, NY 535022</p>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="info-box">
-                    <i class="bi bi-telephone"></i>
-                    <h3>Call Us</h3>
-                    <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="info-box">
-                    <i class="bi bi-envelope"></i>
-                    <h3>Email Us</h3>
-                    <p>info@example.com<br>contact@example.com</p>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="info-box">
-                    <i class="bi bi-clock"></i>
-                    <h3>Open Hours</h3>
-                    <p>Monday - Friday<br>9:00AM - 05:00PM</p>
-                  </div>
-                </div>
+        <div class="container">
+            <div class="row">
+              <div class="col-lg-6 d-flex flex-column justify-content-center">
+                {% if user.is_authenticated %}
+                <h1>Welcome, {{user.username}}</h1>
+                {% else %}
+                <h1 data-aos="fade-up">Philippine Stock Exchange Index Prediction <br>(Using k-NN Algorithm)</h1>
+                {% endif %}
+                <!-- <h2 data-aos="fade-up" data-aos-delay="400">To download the application, press the button below.</h2> -->
               </div>
-  
-            </div>
   
             <div class="col-lg-6">
               <form action="forms/contact.php" method="post" class="php-email-form">
