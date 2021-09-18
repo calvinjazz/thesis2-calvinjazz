@@ -89,6 +89,10 @@
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+        
         <div class="container">
             <div class="row">
               <div class="col-lg-6 d-flex flex-column justify-content-center">
