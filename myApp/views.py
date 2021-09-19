@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from pandas.core.frame import DataFrame
-from .models import Feature
+from .models import Member
 
 import pandas as pd
 import numpy as np
@@ -17,23 +17,23 @@ import math
 
 # Create your views here.
 def index(request):
-    features = Feature.objects.all()
-    return render(request, 'index.html', {'features': features})
+    member = Member.objects.all()
+    return render(request, 'index.html', {'member': member})
 
 def register(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
         password2 = request.POST['password2']
 
         if password == password2:
-            if User.objects.filter(email=email).exists():
+            if User.objects.filter(username=username).exists():
                 messages.info(request, 'Email already used')
                 return redirect('register')
             else:
-                user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, password=password)
+                user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, password=password)
                 user.save();
                 return redirect('login')
         else:
@@ -44,10 +44,10 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
 
-        user = auth.authenticate(email=email, password=password)
+        user = auth.authenticate(username=username, password=password)
 
         if user is not None:
             auth.login(request, user)

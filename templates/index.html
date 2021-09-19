@@ -44,7 +44,7 @@
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="" class="logo d-flex align-items-center">
         <img src="{% static 'assets/img/logo.png' %}" alt="">
         <span>k-NNVISION</span>
       </a>
@@ -53,10 +53,8 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="chart">Chart</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -74,7 +72,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="#footer">Contact</a></li>
           {% if user.is_authenticated %}
           <li><a class="getstarted scrollto" href="logout">Log Out</a></li>
           {% else %}
@@ -94,7 +92,7 @@
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
           {% if user.is_authenticated %}
-          <h1>Welcome, {{user.username}}</h1>
+          <h1>Welcome, {{user.first_name}}</h1>
           {% else %}
           <h1 data-aos="fade-up">Philippine Stock Exchange Index Prediction <br>(Using k-NN Algorithm)</h1>
           {% endif %}
@@ -154,8 +152,8 @@
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <h2>Team</h2>
-          <p>Our hard working team</p>
+          <h2>Our hard working team</h2>
+          <p>We envision the future</p>
         </header>
 
         <div class="row gy-4">
@@ -172,8 +170,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
+                <h4>{{member.0.name}}</h4>
+                <span>{{member.0.details}}</span>
                 <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
               </div>
             </div>
@@ -191,8 +189,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
+                <h4>{{member.1.name}}</h4>
+                <span>{{member.1.details}}</span>
                 <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
               </div>
             </div>
@@ -201,7 +199,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
               <div class="member-img">
-                <img src="{% static 'assets/img/team/team-3.jpg' %}{% static '" class="img-fluid" alt="">
+                <img src="{% static 'assets/img/team/team-3.jpg' %}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -210,8 +208,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
+                <h4>{{member.2.name}}</h4>
+                <span>{{member.2.details}}</span>
                 <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
               </div>
             </div>
@@ -220,7 +218,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
             <div class="member">
               <div class="member-img">
-                <img src="{% static 'assets/img/team/team-4.jpg' %}{% static '" class="img-fluid" alt="">
+                <img src="{% static 'assets/img/team/team-4.jpg' %}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -229,8 +227,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
+                <h4>{{member.3.name}}</h4>
+                <span>{{member.3.details}}</span>
                 <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
               </div>
             </div>
@@ -241,56 +239,6 @@
       </div>
 
     </section><!-- End Team Section -->
-
-    <!-- ======= Values Section ======= -->
-    <section id="values" class="values">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Our Team</h2>
-          <p>We envision the future</p>
-        </header>
-
-        <div class="row">
-
-          <div class="col-lg-4">
-            <div class="box" data-aos="fade-up" data-aos-delay="200">
-              <img src="{% static 'assets/img/values-1.png' %}" class="img-fluid" alt="">
-              <h3>{{features.0.name}}</h3>
-              <p>{{features.0.details}}</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="fade-up" data-aos-delay="400">
-              <img src="{% static 'assets/img/values-2.png' %}" class="img-fluid" alt="">
-              <h3>{{features.1.name}}</h3>
-              <p>{{features.1.details}}</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="fade-up" data-aos-delay="600">
-              <img src="{% static 'assets/img/values-3.png' %}" class="img-fluid" alt="">
-              <h3>{{features.2.name}}</h3>
-              <p>{{features.2.details}}</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="fade-up" data-aos-delay="600">
-              <img src="{% static 'assets/img/values-3.png' %}" class="img-fluid" alt="">
-              <h3>{{features.3.name}}</h3>
-              <p>{{features.3.details}}</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- End Values Section -->
 
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts">

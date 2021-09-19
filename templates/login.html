@@ -44,19 +44,17 @@
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center">
         <img src="{% static 'assets/img/logo.png' %}" alt="">
         <span>k-NNVISION</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a class="nav-link scrollto active" href="/#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="/#about">About</a></li>
+          <li><a class="nav-link scrollto" href="/#team">Team</a></li>
+          <li><a href="chart">Chart</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -74,7 +72,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="/#footer">Contact</a></li>
           {% if user.is_authenticated %}
           <li><a class="getstarted scrollto" href="logout">Log Out</a></li>
           {% else %}
@@ -88,11 +86,18 @@
   </header><!-- End Header -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    <section id="login" class="login">
         {% for message in messages %}
         <h3>{{message}}</h3>
         {% endfor %}
-        
+
+        <div class = "pt-5"></div>
+        <div class = "pt-5"></div>
+        <div class = "pt-5"></div>
+        <div class = "pt-5"></div>
+        <div class = "pt-5"></div>
+        <div class = "pt-5"></div>
+
         <div class="container">
             <div class="row">
               <div class="col-lg-6 d-flex flex-column justify-content-center">
@@ -107,39 +112,39 @@
               </div>
   
             <div class="col-lg-6">
-              <form action="login" method="post">
-                {% csrf_token %}
+              <form action="login" method="POST" class="login-form">
                 <div class="row gy-4">
-                
-                  <h3>LOG IN</h3>
-  
+                  {% csrf_token %}
                   <div class="col-md-12 ">
-                    <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    <input type="text" class="form-control" name="username" placeholder="Email" required>
                   </div>
-  
-                  <div class="col-md-12">
+                  <div class="col-md-12 ">
                     <input type="password" class="form-control" name="password" placeholder="Password" required>
                   </div>
-   
-                  <div class="col-md-12 text-center">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
-  
-                    <button type="submit">Log In</button>
-                    <br>
-                    <br>
-                    <a href="register">Register</a>
-                  </div>
-  
+                  <button type="login-button">Log In</button>
                 </div>
               </form>
-  
+
+              <div class = "pb-3"></div>
+              <a href="register">
+              <p class="text-center">Don't have an account? Register here.</p>
+              </a>
+
             </div>
   
           </div>
   
         </div>
+
+        <div class = "pb-5"></div>
+        <div class = "pb-5"></div>
+        <div class = "pb-5"></div>
+        <div class = "pb-5"></div>
+        <div class = "pb-5"></div>
+        <div class = "pb-5"></div>
+        <div class = "pb-5"></div>
+
+
   
       </section><!-- End Contact Section -->
 
