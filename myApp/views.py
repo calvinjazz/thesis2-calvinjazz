@@ -87,20 +87,6 @@ def chart(request):
     df = df.loc[(df!=0).all(axis=1)] #removes 0s
     df.to_csv('dataset.csv', index=False)
 
-    """print('rows:', max_rows)
-    
-    try:
-        for i in range(max_rows + 1):
-            result = worksheet2.row_values(i+1)
-            print(result)
-            #if len(result)<9:
-                #worksheet2.delete_rows(i+1)
-    except:
-        print("Oops!", sys.exc_info()[0], "occurred.")
-        print("Next entry.")
-        print()
-"""
-
     dataset = pd.DataFrame(df)
     dataset['timestamp'] = pd.to_datetime(dataset.timestamp)
     datasetHead = dataset.head()
@@ -148,16 +134,16 @@ def chart(request):
 
     mydick = {
         'dataset': dataset.to_html(),
-        'datasetHead': datasetHead.to_html(),
-        'datasetDescribe': datasetDescribe.to_html(),
+#        'datasetHead': datasetHead.to_html(),
+#        'datasetDescribe': datasetDescribe.to_html(),
         'graph': return_graph(dataset),
-        'coef': coef,
-        'xtest': X_test,
-        'dfr': dfr.to_html(),
-        'score': score,
-        'mae': mae,
-        'mse': mse,
-        'rmse': rmse,
+#        'coef': coef,
+#        'xtest': X_test,
+#        'dfr': dfr.to_html(),
+#        'score': score,
+#        'mae': mae,
+#        'mse': mse,
+#        'rmse': rmse,
         'userOpen': userOpen,
         'userHigh': userHigh,
         'userLow': userLow,
@@ -167,7 +153,7 @@ def chart(request):
     return render(request, 'chart.html', context=mydick)
 
 def return_graph(dataset):
-    fig = plt.figure(figsize=(16,6))
+    fig = plt.figure(figsize=(12,6))
     plt.plot(dataset['open'])
 
     imgdata = StringIO()
