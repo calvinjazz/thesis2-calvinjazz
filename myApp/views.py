@@ -14,6 +14,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import confusion_matrix, accuracy_score
 import math
+import gspread
+import sys
 
 # Create your views here.
 def index(request):
@@ -70,10 +72,40 @@ def post(request, pk):
     return render(request, 'post.html', {'pk': pk})
 
 def chart(request):
-    dataset = pd.read_csv('test-dataset.csv')
-    dataset['date'] = pd.to_datetime(dataset.timestamp)
+    gc = gspread.service_account(filename='credentials.json')
+    ss = gc.open_by_key('1cIdPmEpklbm5AAx91sOswdyZDK-9RDGIeC8zVbxNxwI')
+    worksheet = ss.sheet1
+    dataframe = pd.DataFrame(worksheet.get_all_records())
+
+
+    dataframe.to_csv('dataset.csv', index=False)
+    df = pd.read_csv('dataset.csv')
+
+    #clean the data
+    df = df.drop(columns=['error'])
+    df = df.dropna()
+    df = df.loc[(df!=0).all(axis=1)] #removes 0s
+    df.to_csv('dataset.csv', index=False)
+
+    """print('rows:', max_rows)
+    
+    try:
+        for i in range(max_rows + 1):
+            result = worksheet2.row_values(i+1)
+            print(result)
+            #if len(result)<9:
+                #worksheet2.delete_rows(i+1)
+    except:
+        print("Oops!", sys.exc_info()[0], "occurred.")
+        print("Next entry.")
+        print()
+"""
+
+    dataset = pd.DataFrame(df)
+    dataset['timestamp'] = pd.to_datetime(dataset.timestamp)
     datasetHead = dataset.head()
     datasetDescribe = dataset.describe()
+
 
     #knn regression
     X  = dataset[['open','high','low','volume']]
@@ -131,7 +163,7 @@ def chart(request):
         'userLow': userLow,
         'userVolume': userVolume,
         'predictedValue': predictedValue,
-    }
+    } 
     return render(request, 'chart.html', context=mydick)
 
 def return_graph(dataset):
