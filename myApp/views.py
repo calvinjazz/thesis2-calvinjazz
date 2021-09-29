@@ -163,3 +163,80 @@ def return_graph(dataset):
     data = imgdata.getvalue()
     
     return data
+
+def advanced(request):
+    gc = gspread.service_account(filename='credentials.json')
+    ss = gc.open_by_key('1cIdPmEpklbm5AAx91sOswdyZDK-9RDGIeC8zVbxNxwI')
+    worksheet = ss.sheet1
+    dataframe = pd.DataFrame(worksheet.get_all_records())
+
+
+    dataframe.to_csv('dataset.csv', index=False)
+    df = pd.read_csv('dataset.csv')
+
+    #clean the data
+    df = df.drop(columns=['error'])
+    df = df.dropna()
+    df = df.loc[(df!=0).all(axis=1)] #removes 0s
+    df.to_csv('dataset.csv', index=False)
+
+    dataset = pd.DataFrame(df)
+    dataset['timestamp'] = pd.to_datetime(dataset.timestamp)
+    datasetHead = dataset.head()
+    datasetDescribe = dataset.describe()
+
+
+    #knn regression
+    X  = dataset[['open','high','low','volume']]
+    y = dataset['close']
+
+    #separate training and testing
+    X_train , X_test , y_train , y_test = train_test_split(X ,y , random_state = 0)
+        
+    #train
+    regressor = LinearRegression()
+    regressor.fit(X_train,y_train)
+
+    coef = regressor.coef_
+
+    predicted=regressor.predict(X_test)
+
+    dframe=pd.DataFrame(y_test,predicted)
+    dfr=pd.DataFrame({'Actual':y_test,'Predicted':predicted})
+
+    #check accuracy
+    score = regressor.score(X_test,y_test)
+    mae = metrics.mean_absolute_error(y_test,predicted)
+    mse = metrics.mean_squared_error(y_test,predicted)
+    rmse = math.sqrt(metrics.mean_squared_error(y_test,predicted))
+
+    if request.method == 'POST':
+        userOpen = float(request.POST['userOpen'])
+        userHigh = float(request.POST['userHigh'])
+        userLow = float(request.POST['userLow'])
+        userVolume = int(request.POST['userVolume'])
+
+    else:
+        userOpen = ''
+        userHigh = ''
+        userLow = ''
+        userVolume = ''
+
+    mydick = {
+        'dataset': dataset.to_html(),
+        'datasetHead': datasetHead.to_html(),
+        'datasetDescribe': datasetDescribe.to_html(),
+        'graph': return_graph(dataset),
+        'coef': coef,
+        'xtest': X_test,
+        'dfr': dfr.to_html(),
+        'score': score,
+        'mae': mae,
+        'mse': mse,
+        'rmse': rmse,
+        'userOpen': userOpen,
+        'userHigh': userHigh,
+        'userLow': userLow,
+        'userVolume': userVolume,
+    } 
+    return render(request, 'advanced.html', context=mydick)

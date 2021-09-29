@@ -52,9 +52,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li><a class="nav-link scrollto active" href="/#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="/#about">About</a></li>
+          <li><a class="nav-link scrollto" href="/#team">Team</a></li>
           <li><a href="chart">Chart</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -110,7 +110,13 @@
                     <div class="box" data-aos="fade-up" data-aos-delay="200">
                         {{graph|safe}}              
                         <!--<img src="{% static 'assets/img/values-1.png' %}" class="img-fluid" alt="">-->
+                        <div class="text-center text-lg-start">
+                            <a href="advanced" class="text-center">
+                              <p>Advanced</p>
+                            </a>
+                        </div>
                     </div>
+                    
                 </div>
 
             </div>
@@ -120,7 +126,7 @@
   </section><!-- End Values Section -->
 
     <!-- ======= Values Section ======= -->
-  <section id="values" class="values">
+  <section id="prediction" class="values">
 
     <div class="container" data-aos="fade-up">
 
@@ -128,15 +134,24 @@
         <p>PREDICT A CLOSE</p>
       </header>
 
+      {% if predictedValue > 0 %}
+      <header class="section-header">
+        <h2>Estimated Close Value:</h2>
+        <p>{{predictedValue}}</p>
+      </header>
+      {% endif %}
+
     </div>
 
   </section><!-- End Values Section -->
 
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts">
+    
+ 
       <div class="container" data-aos="fade-up">
 
-        <form method="POST" action="">
+        <form method="POST" action="#prediction">
             {% csrf_token %}
 
             <div class="row gy-4">
@@ -194,22 +209,14 @@
       </div>
     </section><!-- End Counts Section -->
 
+
+    <div class = "pt-5"></div>
+    <div class = "pt-5"></div>
+    <div class = "pt-5"></div>
+    <div class = "pt-5"></div>
+
   </main><!-- End #main -->
 
-
-  <!-- ======= Values Section ======= -->
-  <section id="values" class="values">
-
-    <div class="container" data-aos="fade-up">
-
-      <header class="section-header">
-        <h2>Estimated Close Value:</h2>
-        <p>{{predictedValue}}</p>
-      </header>
-
-    </div>
-
-  </section><!-- End Values Section -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

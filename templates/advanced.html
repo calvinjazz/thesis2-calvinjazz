@@ -20,22 +20,3 @@
 {{rmse|safe}}
 <h3>Bar Graph:</h3>
 {{barGraph|safe}}
-
-
-
-<h1>PREDICT VALUE:</h1>
-<form method="POST" action="">
-    {% csrf_token %}
-    <p>Open:</p>
-    <input type="text" name="userOpen"/>
-    <p>High:</p>
-    <input type="text" name="userHigh"/>
-    <p>Low:</p>
-    <input type="text" name="userLow"/>
-    <p>Volume:</p>
-    <input type="text" name="userVolume"/><br>
-    <input type="submit"/>
-</form>
-
-<h3>Predicted Value:</h3>
-<h3>{{predictedValue}}</h3>
