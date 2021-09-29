@@ -119,11 +119,22 @@
 
   </section><!-- End Values Section -->
 
+    <!-- ======= Values Section ======= -->
+  <section id="values" class="values">
+
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <p>PREDICT A CLOSE</p>
+      </header>
+
+    </div>
+
+  </section><!-- End Values Section -->
+
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts">
       <div class="container" data-aos="fade-up">
-
-        <h1 class="text-center">PREDICT A CLOSE:</h1>
 
         <form method="POST" action="">
             {% csrf_token %}
@@ -192,7 +203,7 @@
     <div class="container" data-aos="fade-up">
 
       <header class="section-header">
-        <h2>Estimated Value:</h2>
+        <h2>Estimated Close Value:</h2>
         <p>{{predictedValue}}</p>
       </header>
 
