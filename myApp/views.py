@@ -257,7 +257,8 @@ def download_file(request):
     # Define text file name
     filename = 'app.apk'
     # Define the full file path
-    filepath = BASE_DIR + '/myApp/Files/' + filename
+    #filepath = BASE_DIR + '/myApp/Files/' + filename
+    
     # Open the file for reading content
     #path = open(filepath, 'rb')
     ## Set the mime type
@@ -269,7 +270,10 @@ def download_file(request):
     ## Return the response value
     #return response
 
-    response = HttpResponse(mimetype='application/force-download')
-    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(filename)
-    response['X-Sendfile'] = smart_str(filepath)
-    return response
+    file_path = os.path.join(settings.MEDIA_ROOT, '/myApp/Files/app.apk')
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.android.package-archive")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
