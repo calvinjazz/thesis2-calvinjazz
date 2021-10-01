@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('counter', views.counter, name='counter'),
@@ -11,3 +13,4 @@ urlpatterns = [
     path('chart', views.chart, name='chart'),
     path('advanced', views.advanced, name='advanced'),
 ]
+

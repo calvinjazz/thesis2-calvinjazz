@@ -3,7 +3,10 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from pandas.core.frame import DataFrame
-from .models import Member
+from .models import Member, Files
+from django.conf import settings
+from django.http import HttpResponse, Http404
+
 
 import pandas as pd
 import numpy as np
@@ -15,12 +18,18 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import confusion_matrix, accuracy_score
 import math
 import gspread
-import sys
+
+import mimetypes
+import os
+
 
 # Create your views here.
 def index(request):
-    member = Member.objects.all()
-    return render(request, 'index.html', {'member': member})
+    context = {
+        'member':Member.objects.all()
+    }
+    
+    return render(request, 'index.html', context)
 
 def register(request):
     if request.method == 'POST':
@@ -240,3 +249,21 @@ def advanced(request):
         'userVolume': userVolume,
     } 
     return render(request, 'advanced.html', context=mydick)
+
+def download_file(request):
+    # Define Django project base directory
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # Define text file name
+    filename = 'app.apk'
+    # Define the full file path
+    filepath = BASE_DIR + '/myApp/Files/' + filename
+    # Open the file for reading content
+    path = open(filepath, 'rb')
+    # Set the mime type
+    mime_type, _ = mimetypes.guess_type(filepath)
+    # Set the return value of the HttpResponse
+    response = HttpResponse(path, content_type=mime_type)
+    # Set the HTTP header for sending to browser
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    # Return the response value
+    return response
