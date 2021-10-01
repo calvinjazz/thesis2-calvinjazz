@@ -6,6 +6,7 @@ from pandas.core.frame import DataFrame
 from .models import Member, Files
 from django.conf import settings
 from django.http import HttpResponse, Http404
+from django.utils.encoding import smart_str
 
 
 import pandas as pd
@@ -258,12 +259,17 @@ def download_file(request):
     # Define the full file path
     filepath = BASE_DIR + '/myApp/Files/' + filename
     # Open the file for reading content
-    path = open(filepath, 'rb')
-    # Set the mime type
-    mime_type, _ = mimetypes.guess_type(filepath)
-    # Set the return value of the HttpResponse
-    response = HttpResponse(path, content_type=mime_type)
-    # Set the HTTP header for sending to browser
-    response['Content-Disposition'] = "attachment; filename=%s" % filename
-    # Return the response value
+    #path = open(filepath, 'rb')
+    ## Set the mime type
+    #mime_type, _ = mimetypes.guess_type(filepath)
+    ## Set the return value of the HttpResponse
+    #response = HttpResponse(path, content_type=mime_type)
+    ## Set the HTTP header for sending to browser
+    #response['Content-Disposition'] = "attachment; filename=%s" % filename
+    ## Return the response value
+    #return response
+
+    response = HttpResponse(mimetype='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(filename)
+    response['X-Sendfile'] = smart_str(filepath)
     return response
