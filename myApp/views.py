@@ -5,7 +5,7 @@ from django.contrib import messages
 from pandas.core.frame import DataFrame
 from .models import Member, Files
 from django.conf import settings
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, FileResponse
 from django.utils.encoding import smart_str
 
 
@@ -277,3 +277,10 @@ def download_file(request):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
+
+def download(request):
+    file=open('crm/models.py','rb')
+    response =FileResponse(file)
+    response['Content-Type']='application/octet-stream'
+    response['Content-Disposition']='attachment;filename="models.py"'
+    return response
