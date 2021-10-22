@@ -142,6 +142,8 @@ def chart(request):
         userVolume = ''
         predictedValue = ''
 
+    graph = return_graph(dataset)
+
     mydick = {
         'dataset': dataset.to_html(),
 #        'datasetHead': datasetHead.to_html(),
@@ -165,6 +167,7 @@ def chart(request):
 def return_graph(dataset):
     fig = plt.figure(figsize=(12,6))
     plt.plot(dataset['open'])
+    plt.savefig('static/assets/img/chart_image.png')
 
     imgdata = StringIO()
     fig.savefig(imgdata, format='svg')
