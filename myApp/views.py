@@ -63,7 +63,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('/')
+            return redirect('chart')
         else:
             messages.info(request, 'Credentials invalid')
             return redirect('login')
@@ -72,7 +72,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    return redirect('chart')
 
 def counter(request):
     posts = [1, 2, 3, 4, 5, 'tim', 'tom', 'john']

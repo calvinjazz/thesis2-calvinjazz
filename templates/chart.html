@@ -52,27 +52,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="/#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="/#about">About</a></li>
-          <li><a class="nav-link scrollto" href="/#team">Team</a></li>
           <li><a href="chart">Chart</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
           <li><a class="nav-link scrollto" href="#footer">Contact</a></li>
           {% if user.is_authenticated %}
           <li><a class="getstarted scrollto" href="logout">Log Out</a></li>
@@ -95,13 +75,19 @@
     <div class = "pt-5"></div>
     <div class = "pt-5"></div>
 
-    <!-- ======= Values Section ======= -->
-    <section id="values" class="values">
+    <!-- ======= Chart Section ======= -->
+    <section id="chart" class="chart">
 
         <div class="container" data-aos="fade-up">
 
             <header class="section-header">
-                <p>Philippine Stock Exchange Index</p>
+                {% if user.is_authenticated %}
+                <h1>Welcome, {{user.first_name}}</h1>
+                {% else %}
+                <h1 data-aos="fade-up">Philippine Stock Exchange Index Prediction <br>(Using k-NN Algorithm)</h1>
+                {% endif %}
+
+                <div class = "pt-5"></div>
             </header>
 
             <div class="row">
@@ -122,17 +108,11 @@
 
         </div>
 
-  </section><!-- End Values Section -->
-
-    <!-- ======= Values Section ======= -->
-  <section id="prediction" class="values">
-
     <div class="container" data-aos="fade-up">
 
-      <header class="section-header">
-        <p>PREDICT A CLOSE</p>
-      </header>
+    </section>
 
+    <section id="prediction" class="chart">
       {% if predictedValue > 0 %}
       <header class="section-header">
         <h2>Estimated Close Value:</h2>
@@ -140,74 +120,77 @@
       </header>
       {% endif %}
 
-    </div>
-
-  </section><!-- End Values Section -->
-
-    <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
+    </section>
     
- 
+    <section id="chart" class="chart">
+
       <div class="container" data-aos="fade-up">
+        <div class="row gx-5">
 
-        <form method="POST" action="#prediction">
-            {% csrf_token %}
+          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="content">
+              <h3>Predict a Close</h3>
+              <h2>To predict a close price, the app takes the open, high, low, and volume as parameters and runs it through the k-nn algorithm.</h2>
+            </div>
+          </div>
 
-            <div class="row gy-4">
+      
 
-            <div class="col-lg-3 col-md-6">
-                <div class="count-box">
-                <!--<i class="bi bi-emoji-smile"></i>-->
-                <div>
-                    <span>Open:</span>
-                    <input type="text" name="userOpen"/>
-                </div>
-                </div>
+      <div class="col-lg-6">
+        <form action="#prediction" method="POST">
+          {% csrf_token %}
+          <div class="row gy-4">
+
+            <div class="col-md-6">
+              <div class="count-box">
+              <div>
+                  <span>Open:</span>
+                  <input type="text" name="userOpen" class="form-control" placeholder="Your Name" required>
+              </div>
+              </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="count-box">
-                <!--<i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>-->
-                <div>
-                    <span>High:</span>
-                    <input type="text" name="userHigh"/>
-                </div>
-                </div>
+
+            <div class="col-md-6">
+              <div class="count-box">
+              <div>
+                  <span>High:</span>
+                  <input type="text" class="form-control" name="userHigh" placeholder="Your Email" required>
+              </div>
+              </div>
+            </div>
+       
+            <div class="col-md-6">
+              <div class="count-box">
+              <div>
+                  <span>Low:</span>
+                  <input type="text" name="userLow" class="form-control" placeholder="Your Name" required>
+              </div>
+              </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="count-box">
-                <!--<i class="bi bi-headset" style="color: #15be56;"></i>-->
-                <div>
-                    <span>Low:</span>
-                    <input type="text" name="userLow"/>
-                </div>
-                </div>
+            <div class="col-md-6">
+              <div class="count-box">
+              <div>
+                  <span>Volume:</span>
+                  <input type="text" class="form-control" name="userVolume" placeholder="Your Email" required>
+              </div>
+              </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="count-box">
-                <!--<i class="bi bi-people" style="color: #bb0852;"></i>-->
-                <div>
-                    <span>Volume:</span>
-                    <input type="text" name="userVolume"/>
-                </div>
-                </div>
-            </div>
+            <button type="submit">Submit</button>
 
-        </div>
-
-        <div class = "pt-5"></div>
-
-        <div class="row align-items-center">
-            <input type="submit"/>
-        </div>
-        
+          </div>
         </form>
 
       </div>
-    </section><!-- End Counts Section -->
 
+    </div>
+
+  </div>
+
+
+  </section><!-- End Chart Section -->
 
     <div class = "pt-5"></div>
     <div class = "pt-5"></div>
