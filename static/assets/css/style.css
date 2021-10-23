@@ -2452,7 +2452,7 @@ section {
 }
 
 .chart .count-box span {
-  font-size: 36px;
+  font-size: 15px;
   display: block;
   font-weight: 600;
   color: #0b198f;
@@ -2467,7 +2467,7 @@ section {
 
 .chart h1 {
   margin: 0;
-  font-size: 48px;
+  font-size: 18px;
   font-weight: 700;
   color: #012970;
 }
