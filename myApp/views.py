@@ -288,37 +288,3 @@ def advanced(request):
     } 
     return render(request, 'advanced.html', context=mydick)
 
-def download_file(request):
-    # Define Django project base directory
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    # Define text file name
-    filename = 'app.apk'
-    # Define the full file path
-    #filepath = BASE_DIR + '/myApp/Files/' + filename
-    
-    # Open the file for reading content
-    #path = open(filepath, 'rb')
-    ## Set the mime type
-    #mime_type, _ = mimetypes.guess_type(filepath)
-    ## Set the return value of the HttpResponse
-    #response = HttpResponse(path, content_type=mime_type)
-    ## Set the HTTP header for sending to browser
-    #response['Content-Disposition'] = "attachment; filename=%s" % filename
-    ## Return the response value
-    #return response
-
-    file_path = os.path.join(settings.MEDIA_ROOT, '/myApp/Files/app.apk')
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/vnd.android.package-archive")
-            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-            return response
-    raise Http404
-
-def download(request):
-    file=open('crm/models.py','rb')
-    response =FileResponse(file)
-    response['Content-Type']='application/octet-stream'
-    response['Content-Disposition']='attachment;filename="models.py"'
-    return response
-
