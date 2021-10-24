@@ -106,6 +106,17 @@
 
             </div>
 
+            <p>Previous open:</p>
+            {{previousOpen}}
+            <p>Previous High:</p>
+            {{previousHigh}}
+            <p>Previous Low:</p>
+            {{previousLow}}
+            <p>Previous Close:</p>
+            {{previousClose}}
+            <p>Previous Volume:</p>
+            {{previousVolume}}
+
         </div>
 
     </section>
@@ -175,6 +186,10 @@
               </div>
               </div>
             </div>
+
+            {% for message in messages %}
+            <h3>{{message}}</h3>
+            {% endfor %}
 
             <button type="submit">Submit</button>
 

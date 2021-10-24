@@ -67,9 +67,6 @@
 
     <!-- ======= Contact Section ======= -->
     <section id="login" class="chart">
-        {% for message in messages %}
-        <h3>{{message}}</h3>
-        {% endfor %}
 
         <div class = "pt-5"></div>
 
@@ -99,7 +96,10 @@
                   <div class="col-md-12">
                     <input type="password" class="form-control" name="password" placeholder="Password" required>
                   </div>
-  
+                  
+                  {% for message in messages %}
+                  <h3>{{message}}</h3>
+                  {% endfor %}
  
                   <button type="submit">Log In</button>
 

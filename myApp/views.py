@@ -7,6 +7,8 @@ from .models import Member, Files
 from django.conf import settings
 from django.http import HttpResponse, Http404, FileResponse
 from django.utils.encoding import smart_str
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 
 import pandas as pd
@@ -47,6 +49,12 @@ def register(request):
             else:
                 user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, password=password)
                 user.save();
+                send_mail(
+                    subject='Thank you for registering!',
+                    message='We would like to express gratitude to you for participating. Currently, our app attempts to make estimates of close prices in stocks with the other variables as parameters. Please look forward to future developments. Thank you!',
+                    from_email='calvinjazz.thesis2@gmail.com',
+                    recipient_list=[username]
+                )
                 return redirect('login')
         else:
             messages.info(request, 'Password not the same')
@@ -87,7 +95,6 @@ def chart(request):
     worksheet = ss.sheet1
     dataframe = pd.DataFrame(worksheet.get_all_records())
 
-
     dataframe.to_csv('dataset.csv', index=False)
     df = pd.read_csv('dataset.csv')
 
@@ -99,9 +106,6 @@ def chart(request):
 
     dataset = pd.DataFrame(df)
     dataset['timestamp'] = pd.to_datetime(dataset.timestamp)
-    datasetHead = dataset.head()
-    datasetDescribe = dataset.describe()
-
 
     #knn regression
     X  = dataset[['open','high','low','volume']]
@@ -114,19 +118,14 @@ def chart(request):
     regressor = LinearRegression()
     regressor.fit(X_train,y_train)
 
-    coef = regressor.coef_
+    #previous day
+    previousOpen = df['open'].iloc[-1]
+    previousHigh = df['high'].iloc[-1]
+    previousLow = df['low'].iloc[-1]
+    previousClose = df['close'].iloc[-1]
+    previousVolume = df['volume'].iloc[-1]
 
-    predicted=regressor.predict(X_test)
-
-    dframe=pd.DataFrame(y_test,predicted)
-    dfr=pd.DataFrame({'Actual':y_test,'Predicted':predicted})
-
-    #check accuracy
-    score = regressor.score(X_test,y_test)
-    mae = metrics.mean_absolute_error(y_test,predicted)
-    mse = metrics.mean_squared_error(y_test,predicted)
-    rmse = math.sqrt(metrics.mean_squared_error(y_test,predicted))
-
+    #validation
     if request.method == 'POST':
         userOpen = float(request.POST['userOpen'])
         userHigh = float(request.POST['userHigh'])
@@ -135,6 +134,47 @@ def chart(request):
         userParameters = [[userOpen, userHigh, userLow, userVolume]]
         predictedValue = regressor.predict(userParameters)
 
+        if userOpen < 1:
+            messages.info(request, 'Open price cannot be less than 1')
+            return redirect('chart')
+        else:
+            pass
+        if userHigh < 1:
+            messages.info(request, 'High price cannot be less than 1')
+            return redirect('chart')
+        else:
+            pass
+        if userLow < 1:
+            messages.info(request, 'Low price cannot be less than 1')
+            return redirect('chart')
+        else:
+            pass
+        if userVolume < 1:
+            messages.info(request, 'Volume cannot be less than 1')
+            return redirect('chart')
+        else:
+            pass
+        if userHigh < userOpen:
+            messages.info(request, 'High price must be the greatest value')
+            return redirect('chart')
+        else:
+            pass
+        if userHigh < userLow:
+            messages.info(request, 'High price must be the greatest value')
+            return redirect('chart')
+        else:
+            pass
+        if userLow > userOpen:
+            messages.info(request, 'Low price must be the smallest value')
+            return redirect('chart')
+        else:
+            pass
+        if userLow > userHigh:
+            messages.info(request, 'Low price must be the smallest value')
+            return redirect('chart')
+        else:
+            pass
+
     else:
         userOpen = ''
         userHigh = ''
@@ -142,25 +182,19 @@ def chart(request):
         userVolume = ''
         predictedValue = ''
 
-    graph = return_graph(dataset)
-
     mydick = {
         'dataset': dataset.to_html(),
-#        'datasetHead': datasetHead.to_html(),
-#        'datasetDescribe': datasetDescribe.to_html(),
         'graph': return_graph(dataset),
-#        'coef': coef,
-#        'xtest': X_test,
-#        'dfr': dfr.to_html(),
-#        'score': score,
-#        'mae': mae,
-#        'mse': mse,
-#        'rmse': rmse,
         'userOpen': userOpen,
         'userHigh': userHigh,
         'userLow': userLow,
         'userVolume': userVolume,
         'predictedValue': predictedValue,
+        'previousOpen' : previousOpen,
+        'previousHigh' : previousHigh,
+        'previousLow' : previousLow,
+        'previousClose' : previousClose,
+        'previousVolume' : previousVolume,
     } 
     return render(request, 'chart.html', context=mydick)
 
@@ -287,3 +321,4 @@ def download(request):
     response['Content-Type']='application/octet-stream'
     response['Content-Disposition']='attachment;filename="models.py"'
     return response
+
