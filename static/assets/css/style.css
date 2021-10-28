@@ -2505,10 +2505,9 @@ section {
 }
 
 .chart .form-general .error-message {
-  display: none;
   color: #fff;
   background: #ed3c0d;
-  text-align: left;
+  text-align: center;
   padding: 15px;
   margin-bottom: 24px;
   font-weight: 600;
@@ -2583,9 +2582,10 @@ section {
 }
 
 .chart h3 {
-  font-size: 14px;
+  margin: 0;
+  font-size: 24px;
   font-weight: 700;
-  color: #4154f1;
+  color: #012970;
   text-transform: uppercase;
 }
 

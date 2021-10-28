@@ -81,7 +81,7 @@
                 {% if user.is_authenticated %}
                 <h3>Welcome, {{user.username}}</h3>
                 {% else %}
-                <h3 style="margin: 0; font-size: 48px; font-weight: 700; color: #012970;"data-aos="fade-up">
+                <h3>
                     Philippine Stock Exchange Index Prediction <br>(Using k-NN Algorithm)
                 </h3>
                 {% endif %}
@@ -89,7 +89,7 @@
               </div>
   
             <div class="col-lg-6">
-              <form action="register" method="POST">
+              <form action="register" method="POST" class="form-general">
                 <div class="row gy-4">
                   {% csrf_token %}
   
@@ -114,7 +114,9 @@
                   </div>
   
                   {% for message in messages %}
-                  <h3>{{message}}</h3>
+                  <div class="error-message">
+                    {{message}}
+                  </div>
                   {% endfor %}
                   
                   <button type="submit">Register</button>

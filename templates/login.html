@@ -76,7 +76,7 @@
                 {% if user.is_authenticated %}
                 <h3>Welcome, {{user.username}}</h3>
                 {% else %}
-                <h3 style="margin: 0; font-size: 48px; font-weight: 700; color: #012970;"data-aos="fade-up">
+                <h3>
                     Philippine Stock Exchange Index Prediction <br>(Using k-NN Algorithm)
                 </h3>
                 {% endif %}
@@ -98,7 +98,9 @@
                   </div>
                   
                   {% for message in messages %}
-                  <h3>{{message}}</h3>
+                  <div class="error-message">
+                    {{message}}
+                  </div>
                   {% endfor %}
  
                   <button type="submit">Log In</button>
