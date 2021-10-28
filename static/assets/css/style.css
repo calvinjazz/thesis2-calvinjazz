@@ -2595,3 +2595,11 @@ section {
   font-weight: 700;
   color: #012970;
 }
+
+.chart p {
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin: 0;
+  color: #4154f1;
+}
