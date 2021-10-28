@@ -2498,13 +2498,13 @@ section {
   margin-bottom: 0;
 }
 
-.chart .php-email-form {
+.chart .form-general {
   background: #fafbff;
   padding: 30px;
   height: 100%;
 }
 
-.chart .php-email-form .error-message {
+.chart .form-general .error-message {
   display: none;
   color: #fff;
   background: #ed3c0d;
@@ -2514,7 +2514,7 @@ section {
   font-weight: 600;
 }
 
-.chart .php-email-form .sent-message {
+.chart .form-general .sent-message {
   display: none;
   color: #fff;
   background: #18d26e;
@@ -2524,7 +2524,7 @@ section {
   font-weight: 600;
 }
 
-.chart .php-email-form .loading {
+.chart .form-general .loading {
   display: none;
   background: #fff;
   text-align: center;
@@ -2532,7 +2532,7 @@ section {
   margin-bottom: 24px;
 }
 
-.chart .php-email-form .loading:before {
+.chart .form-general .loading:before {
   content: "";
   display: inline-block;
   border-radius: 50%;
@@ -2545,26 +2545,26 @@ section {
   animation: animate-loading 1s linear infinite;
 }
 
-.chart .php-email-form input, .contact .php-email-form textarea {
+.chart .form-general input, .contact .form-general textarea {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
   border-radius: 0;
 }
 
-.chart .php-email-form input:focus, .contact .php-email-form textarea:focus {
+.chart .form-general input:focus, .contact .form-general textarea:focus {
   border-color: #4154f1;
 }
 
-.chart .php-email-form input {
+.chart .form-general input {
   padding: 10px 15px;
 }
 
-.chart .php-email-form textarea {
+.chart .form-general textarea {
   padding: 12px 15px;
 }
 
-.chart .php-email-form button[type="submit"] {
+.chart .form-general button[type="submit"] {
   background: #4154f1;
   border: 0;
   padding: 10px 30px;
@@ -2573,7 +2573,7 @@ section {
   border-radius: 4px;
 }
 
-.chart .php-email-form button[type="submit"]:hover {
+.chart .form-general button[type="submit"]:hover {
   background: #5969f3;
 }
 
