@@ -107,7 +107,7 @@
             </div>
 
   
-            <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
+            <div class="col-lg-12 mt-5 mt-lg-0 d-flex">
               <div class="row align-self-center gy-4">
   
                 <div class="col-md-6" data-aos="zoom-out" data-aos-delay="200">
@@ -151,7 +151,7 @@
                 </div>
   
                 <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
-                  <div class="feature-box d-flex align-items-center">
+                  <div class="feature-box d-flex align-items-left">
                     <i class="bi bi-check"></i>
                     <div class="flex-column">
                       <p>Previous Volume:</p>
@@ -167,7 +167,7 @@
 
     </section>
 
-    <section id="prediction">
+    <section id="prediction" class="chart">
       {% if predictedValue > 0 %}
       <header class="section-header">
         <h2>Estimated Close Value:</h2>
@@ -185,13 +185,14 @@
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
               <h3>Predict a Close</h3>
+              <br>
               <p>To predict a close price, the app takes the open, high, low, and volume as parameters and runs it through the k-nn algorithm.</p>
             </div>
           </div>
 
       
 
-      <div class="container">
+      <div class="col-lg-6">
         <form action="#prediction" method="POST" class="form-general">
           {% csrf_token %}
           <div class="row gy-4">
