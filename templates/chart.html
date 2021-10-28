@@ -82,9 +82,9 @@
 
             <header class="section-header">
                 {% if user.is_authenticated %}
-                <h2>Welcome, {{user.first_name}}</h2>
+                <h3>Welcome, {{user.first_name}}</h3>
                 {% else %}
-                <h2 data-aos="fade-up">Philippine Stock Exchange Index Prediction <br>(Using k-NN Algorithm)</h2>
+                <h3 data-aos="fade-up">Philippine Stock Exchange Index Prediction <br>(Using k-NN Algorithm)</h3>
                 {% endif %}
 
                 <div class = "pt-5"></div>
@@ -146,49 +146,34 @@
       
 
       <div class="container">
-        <form action="#prediction" method="POST">
+        <form action="#prediction" method="POST" class="form-general">
           {% csrf_token %}
           <div class="row gy-4">
 
             <div class="col-md-6">
-              <div class="count-box">
-              <div>
                   <h2>Open:</h2>
                   <input type="text" name="userOpen" class="form-control" required>
-              </div>
-              </div>
             </div>
 
-
             <div class="col-md-6">
-              <div class="count-box">
-              <div>
                   <h2>High:</h2>
                   <input type="text" class="form-control" name="userHigh" required>
-              </div>
-              </div>
             </div>
        
             <div class="col-md-6">
-              <div class="count-box">
-              <div>
                   <h2>Low:</h2>
                   <input type="text" name="userLow" class="form-control" required>
-              </div>
-              </div>
             </div>
 
             <div class="col-md-6">
-              <div class="count-box">
-              <div>
                   <h2>Volume:</h2>
                   <input type="text" class="form-control" name="userVolume" required>
-              </div>
-              </div>
             </div>
 
             {% for message in messages %}
-            <h3>{{message}}</h3>
+            <div class="error-message">
+              {{message}}
+            </div>
             {% endfor %}
 
             <button type="submit">Submit</button>
