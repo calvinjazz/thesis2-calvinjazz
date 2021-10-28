@@ -66,32 +66,33 @@
   </header><!-- End Header -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="login" class="chart">
+    <section id="chart" class="chart">
 
         <div class = "pt-5"></div>
-
-              <div class="col-lg-6 d-flex flex-column justify-content-center">
+            <div class="container" data-aos="fade-up">
+              <div class="col-lg-12 d-flex flex-column justify-content-center">
                 
                 {{graph|safe}}
-                <h3>Dataset Describe:</h3>
-                {{datasetDescribe|safe}}
-                <h3>coef</h3>
-                {{coef|safe}}
-                <h3>Actual Vs Prediction</h3>
-                {{dfr|safe}}
-                <h3>score</h3>
-                {{score|safe}}
-                <h3>Mean Absolute Error:</h3>
-                {{mae|safe}}
-                <h3>Mean Squared Error:</h3>
-                {{mse|safe}}
-                <h3>Root Mean Squared Error:</h3>
-                {{rmse|safe}}
-                <h3>Bar Graph:</h3>
-                {{barGraph|safe}}
+                <h2>Dataset Describe:</h2>
+                <p>{{datasetDescribe|safe}}</p>
+                <h2>coef</h2>
+                <p>{{coef|safe}}</p>
+                <h2>Actual Vs Prediction</h2>
+                <p>{{dfr|safe}}</p>
+                <h2>Score:</h2>
+                <p>{{score|safe}}</p>
+                <h2>Mean Absolute Error:</h2>
+                <p>{{mae|safe}}</p>
+                <h2>Mean Squared Error:</h2>
+                <p>{{mse|safe}}</p>
+                <h2>Root Mean Squared Error:</h2>
+                <p>{{rmse|safe}}</p>
+                <h2>Bar Graph:</h2>
+                <p>{{barGraph|safe}}</p>
 
 
               </div>
+            </div>
     
 
         <div class = "pb-5"></div>
