@@ -105,9 +105,10 @@
                 </div>
 
             </div>
-
+        </div>
   
-            <div class="col-lg-12 mt-5 mt-lg-0 d-flex">
+        <div class="container" data-aos="fade-up">
+            <div class="col-lg-12 d-flex flex-column justify-content-center">
               <div class="row align-self-center gy-4">
   
                 <div class="col-md-6" data-aos="zoom-out" data-aos-delay="200">
@@ -162,27 +163,12 @@
  
               </div>
             </div>
-
-        </div>
-
-    </section>
-
-    <section id="prediction" class="chart">
-      {% if predictedValue > 0 %}
-      <header class="section-header">
-        <h2>Estimated Close Value:</h2>
-        <p>{{predictedValue}}</p>
-      </header>
-      {% endif %}
-
-    </section>
-    
-    <section id="chart" class="chart">
-
+            </div>
+        
       <div class="container" data-aos="fade-up">
         <div class="row gx-5">
 
-          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-12 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
               <h3>Predict a Close</h3>
               <br>
@@ -192,7 +178,7 @@
 
       
 
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <form action="#prediction" method="POST" class="form-general">
           {% csrf_token %}
           <div class="row gy-4">
@@ -234,13 +220,17 @@
 
   </div>
 
-
   </section><!-- End Chart Section -->
 
-    <div class = "pt-5"></div>
-    <div class = "pt-5"></div>
-    <div class = "pt-5"></div>
-    <div class = "pt-5"></div>
+  <section id="prediction" class="chart">
+    {% if predictedValue > 0 %}
+    <header class="section-header">
+      <h3>Estimated Close Value:</h3>
+      <p>{{predictedValue}}</p>
+    </header>
+    {% endif %}
+
+  </section>
 
   </main><!-- End #main -->
 
