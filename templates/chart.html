@@ -106,22 +106,68 @@
 
             </div>
 
-            <p>Previous open:</p>
-            {{previousOpen}}
-            <p>Previous High:</p>
-            {{previousHigh}}
-            <p>Previous Low:</p>
-            {{previousLow}}
-            <p>Previous Close:</p>
-            {{previousClose}}
-            <p>Previous Volume:</p>
-            {{previousVolume}}
+  
+            <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
+              <div class="row align-self-center gy-4">
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="200">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <div class="flex-column">
+                      <p>Previous Open:</p>
+                      <h3>{{previousOpen}}</h3>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="300">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <div class="flex-column">
+                      <p>Previous High:</p>
+                      <h3>{{previousHigh}}</h3>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="400">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <div class="flex-column">
+                      <p>Previous Low:</p>
+                      <h3>{{previousLow}}</h3>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="500">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <div class="flex-column">
+                      <p>Previous Close:</p>
+                      <h3>{{previousClose}}</h3>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <div class="flex-column">
+                      <p>Previous Volume:</p>
+                      <h3>{{previousVolume}}</h3>
+                    </div>
+                  </div>
+                </div>
+ 
+              </div>
+            </div>
 
         </div>
 
     </section>
 
-    <section id="prediction" class="chart">
+    <section id="prediction">
       {% if predictedValue > 0 %}
       <header class="section-header">
         <h2>Estimated Close Value:</h2>
