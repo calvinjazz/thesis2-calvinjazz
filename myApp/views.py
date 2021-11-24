@@ -174,6 +174,26 @@ def chart(request):
             return redirect('chart')
         else:
             pass
+        if type(userOpen) != int and type(userOpen) != float:
+            messages.info(request, 'Please enter numeric values')
+            return redirect('chart')
+        else:
+            pass
+        if type(userHigh) != int and type(userHigh) != float:
+            messages.info(request, 'Please enter numeric values')
+            return redirect('chart')
+        else:
+            pass
+        if type(userLow) != int and type(userLow) != float:
+            messages.info(request, 'Please enter numeric values')
+            return redirect('chart')
+        else:
+            pass
+        if type(userVolume) != int and type(userVolume) != float:
+            messages.info(request, 'Please enter numeric values')
+            return redirect('chart')
+        else:
+            pass
 
     else:
         userOpen = ''
