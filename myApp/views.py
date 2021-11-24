@@ -130,7 +130,7 @@ def chart(request):
         userOpen = float(request.POST['userOpen'])
         userHigh = float(request.POST['userHigh'])
         userLow = float(request.POST['userLow'])
-        userVolume = int(request.POST['userVolume'])
+        userVolume = float(request.POST['userVolume'])
         userParameters = [[userOpen, userHigh, userLow, userVolume]]
         predictedValue = regressor.predict(userParameters)
 
