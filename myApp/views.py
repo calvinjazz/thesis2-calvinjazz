@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from pandas.core.frame import DataFrame
 from .models import Member, Files
-from django.conf import settings
+from django.conf import Settings, settings
 from django.http import HttpResponse, Http404, FileResponse
 from django.utils.encoding import smart_str
 from django.core.mail import send_mail
@@ -51,10 +51,10 @@ def register(request):
                 user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, password=password)
                 user.save();
                 EmailMessage(
-                    subject='Thank you for registering!',
-                    message='We would like to express gratitude to you for participating. Currently, our app attempts to make estimates of close prices in stocks with the other variables as parameters. Please look forward to future developments. Thank you!',
-                    from_email='calvinjazz.thesis2@gmail.com',
-                    recipient_list=[username]
+                    'Thank you for registering!',
+                    'We would like to express gratitude to you for participating. Currently, our app attempts to make estimates of close prices in stocks with the other variables as parameters. Please look forward to future developments. Thank you!',
+                    settings.EMAIL_HOST_USER,
+                    [username]
                 )
                 return redirect('login')
         else:
