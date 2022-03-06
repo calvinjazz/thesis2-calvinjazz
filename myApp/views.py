@@ -50,17 +50,18 @@ def register(request):
             else:
                 user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, password=password)
                 user.save();
-                #try:
-                #    email = EmailMessage(
-                #        'Thank you for registering!',
-                #        'We would like to express gratitude to you for participating. Currently, our app attempts to make estimates of close prices in stocks with the other variables as parameters. Please look forward to future developments. Thank you!',
-                #        to=[username]
-                #    )
-                #    email.fail_silently=False
-                #    email.send()
-                #except Exception as e:
-                #    raise e 
-                return redirect('login')
+                try:
+                    email = EmailMessage(
+                        'Thank you for registering!',
+                        'We would like to express gratitude to you for participating. Currently, our app attempts to make estimates of close prices in stocks with the other variables as parameters. Please look forward to future developments. Thank you!',
+                        to=[username]
+                    )
+                    email.fail_silently=False
+                    email.send()
+                except Exception as e:
+                    raise e 
+                finally:
+                    return redirect('login')
         else:
             messages.info(request, 'Password not the same')
             return redirect('register')
