@@ -31,6 +31,8 @@ dependencies:
     sdk: flutter
   http: ^0.13.4
   charts_flutter: ^0.11.0
+  shelf: any
+  shelf_static: any
 
 dependency_overrides:
   charts_flutter:
@@ -46,13 +48,15 @@ dependency_overrides:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  build_web_compilers: ">=2.12.0 <4.0.0"
+  build_runner: ">=1.6.2 <3.0.0"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
