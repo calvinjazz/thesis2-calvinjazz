@@ -58,7 +58,7 @@ class PredictionChart extends StatelessWidget {
                 charts.SelectionModelConfig(
                     changedListener: (charts.SelectionModel model) {
                   if (model.hasDatumSelection) {
-                    final value = model.selectedSeries[0]
+                    final value = model.selectedSeries[1]
                         .measureFn(model.selectedDatum[0].index);
                     CustomCircleSymbolRenderer.value =
                         value.toString(); // paints the tapped value
